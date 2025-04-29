@@ -1,0 +1,182 @@
+
+@font-face{
+    font-family: eastsea;
+    src: url(fonts/Nanum_Myeongjo/NanumMyeongjo-Bold.ttf);
+    font-weight: bold; 
+}
+@font-face {
+    font-family: orv;
+    src: url(fonts/KGModern/KGModernMonogramPlain.ttf);
+    white-space: nowrap;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    font-family: eastsea;
+    font-size:25px;
+    color:white;
+}
+.middle {
+     background-color: rgb(31, 76, 193);
+     background-image:linear-gradient(rgb(49, 106, 150), rgb(31, 76, 193) );
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     -ms-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+ }
+
+
+.boarder {
+    
+    width: 0px;
+    height: 0px;
+
+}
+
+.blur{
+    animation-name: blur-tation;
+    animation-fill-mode: forwards;
+    animation-duration: .2s;
+    animation-delay: 0.4s;
+    animation-timing-function: ease;
+    
+}
+
+
+
+@keyframes blur-tation{
+
+    0%{
+        transform : translate(-50%, -50%) scale(0.9);  
+        
+
+    }
+    100%{
+        transform : translate(-50%, -50%) scale(1);
+        height:400px;
+        width:700px;
+        border-width: 5px;
+        border-style:double;
+        box-shadow: 10px 8px 8px rgb(81, 172, 243) ;
+        
+    }
+
+
+}
+
+
+/* @keyframes blur-tation {
+    0%{
+        width: 0px;
+        height: 0px;
+    }
+    25%{
+        rotate: 90deg;
+        width: 400px;
+    }
+    50% {
+        filter: blur(20px);
+        transform: skew(45deg);
+        rotate: 90deg;
+    }
+    75%
+    {
+        height: 700px;
+        filter: blur(10px);
+        rotate: 70deg;
+    }
+    100% {
+           
+        height:400px;
+        width:700px;
+        border-width: 5px;
+        border-style:double;
+        box-shadow: 10px 8px 8px rgb(81, 172, 243) ;
+        
+        
+    }
+}
+ */
+
+.nerm {
+    animation-fill-mode: forwards;
+    animation-name: nerm;
+    animation-duration:2s;
+    animation-delay: 1s;
+    font-family: eastsea;
+    opacity:0%;
+}
+.text {
+
+    font-size: 40px;
+    font-family: orv;
+    text-align: center;
+    line-height:50px;
+}
+
+@keyframes nerm{
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
+
+}
+.bg-text{
+    writing-mode: vertical-lr;
+}
+
+.beginning {
+    text-shadow: 2px 3px rgb(78, 145, 232);
+}
+.typewriter-animation {
+    height:100%;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(157),step-end infinite alternate;
+}
+
+@keyframes typing {
+    from{height: 0;}
+    0%{
+        opacity: 0%;
+    }
+    50%{
+        opacity:70%;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+.pulse{
+    background-color:rgb(31, 76, 193);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height:400px;
+    width:700px;
+    animation: pulse 2s infinite;
+    animation-delay: 3s;
+    opacity: 0%;
+    transition-timing-function: ease-in-out;
+}
+
+@keyframes pulse{
+
+    0%{
+        opacity: 100%;
+        transform : translate(-50%, -50%) scale(0.9);
+    }
+    70% {
+        transform : translate(-50%, -50%) scale(1.2);
+        filter:blur();
+    }
+    100% {
+        filter:blur();
+        transform : translate(-50%, -50%) scale(0.9);
+    }
+}
