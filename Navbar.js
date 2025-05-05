@@ -4,6 +4,6 @@ fetch('/navbar.html')
       document.getElementById('navbar').innerHTML = data;
     });
 
-    window.addEventListener('load', function () {
-      document.body.classList.add('loaded');
-    });
+    // window.addEventListener('load', function () {
+    //   document.body.classList.add('loaded');
+    // });
