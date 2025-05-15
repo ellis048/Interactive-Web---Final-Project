@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: center;
     z-index: 9999;
+
   }
 
   /* animation */
@@ -32,4 +33,12 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease;
+  }
+
+  /* animations for the nav bar  */
+  @keyframes fades{
+    0% {
+      opacity: 0%;
+    }
+    100%{opacity: 100%;}
   }
