@@ -1,30 +1,84 @@
-window.scrollTo(0, 0);
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const scene = new THREE.Scene(); 
-scene.background = new THREE.Color(0x121212);
-const camera = new THREE.PerspectiveCamera(75, 800 / 800, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(800, 800);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshNormalMaterial();
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+const scene = new THREE.Scene();
 
-camera.position.z = 5;
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.set(4, 5, 11);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.minDistance = 5;
+controls.maxDistance = 20;
+controls.minPolarAngle = 0.5;
+controls.maxPolarAngle = 1.5;
+controls.autoRotate = false;
+controls.target = new THREE.Vector3(0, 1, 0);
+controls.update();
+
+const groundGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
+groundGeometry.rotateX(-Math.PI / 2);
+const groundMaterial = new THREE.MeshStandardMaterial({
+  color: 0x555555,
+  side: THREE.DoubleSide
+});
+const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+groundMesh.castShadow = false;
+groundMesh.receiveShadow = true;
+scene.add(groundMesh);
+
+const spotLight = new THREE.SpotLight(0xffffff, 3000, 103, 0.22, 2);
+spotLight.position.set(5, 25, 5);
+spotLight.castShadow = true;
+spotLight.shadow.bias = -0.0001;
+scene.add(spotLight);
+
+const loader = new GLTFLoader().setPath('assets/product/');
+loader.load('product.gltf', (gltf) => {
+  console.log('loading model');
+  const mesh = gltf.scene;
+
+  mesh.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  mesh.position.set(0, 1.5, 1);
+  scene.add(mesh);
+
+  document.getElementById('progress-container').style.display = 'none';
+}, (xhr) => {
+  console.log(`loading ${xhr.loaded / xhr.total * 100}%`);
+}, (error) => {
+  console.error(error);
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
 function animate() {
   requestAnimationFrame(animate);
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  controls.update();
   renderer.render(scene, camera);
 }
-animate();
 
-// Handle window resizing
-window.addEventListener('resize', () => {
-  camera.aspect = 800 / 800;
-  camera.updateProjectionMatrix();
-  renderer.setSize(800, 800);
-});
+animate();

@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="../preloader.css">
     <script src="Navbar.js"></script>
     <script src="threejs.js"></script>
-    <!-- needs its own styling -->
-
+    <!-- needs its own pop up for info -->
+ <script>
+    window.onload = function() {
+      alert("left click to rotate. right click to move, scroll to move in and out");
+    };
+  </script>
     
   </head>
-  <body style="background-color: black;">
+  <body style="background-color: rgb(197, 197, 197);">
     
     <div id="navbar" style="color:white;"></div> 
-    
-  <iframe src="scene.html"></iframe>
 
+  <iframe src="scene.html"></iframe>
+  
 
   </body>
 </html>
