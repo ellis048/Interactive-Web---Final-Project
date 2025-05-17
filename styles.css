@@ -10,7 +10,6 @@ body {
   background-color: #ffffff;
   color: #000000;
   line-height: 1.6;
-  height: 1400px;
 }
 
 header {
@@ -52,7 +51,7 @@ header p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 20px;
+  padding: 80px 23px 160px 23px;
   background-color: #f5f5f7;
 }
 
@@ -96,11 +95,11 @@ header p {
 }
 
 footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 40px 40px;
+  padding: 30px 40px;
   background-color: rgb(0, 0, 0);
   color: white;
   text-align: center;
@@ -121,6 +120,7 @@ footer {
   /* About us section */
   .container {
     max-width: 1100px;
+
     margin: auto;
     padding: 2rem;
     background: white;
@@ -157,4 +157,19 @@ footer {
     border-radius: 10px;
   }
 
-  
+    .product-link {
+    color: #ffffff;
+    letter-spacing: .25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 1.3em;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
